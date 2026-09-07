@@ -1,0 +1,4 @@
+function jalaliToday(){if(window.jalaali){const j=jalaali.toJalaali(new Date());return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`}return new Intl.DateTimeFormat('fa-IR-u-ca-persian').format(new Date()).replaceAll('،','/')}
+function digits(v){return String(v||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[-.]/g,'/')}
+function jalaliToKey(v){const p=digits(v).split('/').map(Number);if(!window.jalaali||p.length!==3||p.some(Number.isNaN))return new Date().toISOString().slice(0,10);const g=jalaali.toGregorian(p[0],p[1],p[2]);return `${g.gy}-${String(g.gm).padStart(2,'0')}-${String(g.gd).padStart(2,'0')}`}
+function keyToJalali(key){if(!window.jalaali)return key;const j=jalaali.toJalaali(new Date(key+'T00:00:00'));return `${j.jy}/${String(j.jm).padStart(2,'0')}/${String(j.jd).padStart(2,'0')}`}
